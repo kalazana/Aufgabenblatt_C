@@ -4,7 +4,7 @@ import java.lang.reflect.Array;
 /**
  * The type Medium.
  */
-public abstract class Medium {
+public abstract class Medium implements Comparable<Medium>{
 
     private String titel;
 
@@ -47,12 +47,8 @@ public abstract class Medium {
      */
     public abstract String calculateRepresentation();       //für die Vererbung der Methode in die anderen Klassen
 
-
-
-
-
-
-
-
-
+    @Override
+    public int compareTo(Medium medium) {
+        return this.getTitel().compareTo(medium.getTitel());
+    }
 }
