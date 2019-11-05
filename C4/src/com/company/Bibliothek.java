@@ -1,13 +1,10 @@
 package com.company;
 
 //Florian Eimann
-import java.lang.reflect.Array;
-import java.net.URL;
 
 import static com.company.Buch.checkISBN10;
 import static com.company.Buch.checkISBN13;
 import static com.company.ElektronischesMedium.checkURL;
-
 
 /**
  * The type Bibliothek.
