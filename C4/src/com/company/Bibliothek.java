@@ -27,7 +27,7 @@ public class Bibliothek {
         zettelkasten.addMedium(new CD("Live At Wembley", "Queen", "Parlophone (EMI)"));
 
 
-       // zettelkasten.sort(); // für Aufgabe C.5
+       zettelkasten.sort(true); // für Aufgabe C.5
 
         for (Medium medium : zettelkasten) {
             System.out.println(medium.calculateRepresentation());
