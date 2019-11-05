@@ -1,7 +1,5 @@
 package com.company;
 
-import java.util.Arrays;
-
 /**
  * The type Buch.
  */
@@ -11,6 +9,7 @@ public class Buch extends Medium{
     private String Verlag;
     private String ISBN;
     private String Verfasser;
+
 
 
     /**
@@ -26,9 +25,8 @@ public class Buch extends Medium{
         super(_titel);
         this.Erscheinungsjahr = _Erscheinungsjahr;
         this.Verlag = _Verlag;
-        this.ISBN = _ISBN;
         this.Verfasser = _Verfasser;
-
+        setISBN(_ISBN);
 
     }
 
@@ -74,8 +72,26 @@ public class Buch extends Medium{
      * @param ISBN the isbn
      */
     public void setISBN(String ISBN) {
+        // [...] = Zeichenkategorie
+        // ^ = Invertierung
+        String zahlentester = ISBN.replaceAll("[^0-9X]", "");  //eckige zeichen = zeichenkategorie
+        int[] zahlen = new int[13];
+        for(int i = 0; i< zahlentester.length(); i++) {
+            char c = zahlentester.charAt(i);
+            if(c == 'X') {
+                zahlen[i] = 10;
+            }else{
+                zahlen[i] = c;
+            }
+        }
+        if(zahlentester.length() == 10 && checkISBN10(zahlen)){
+            this.ISBN = ISBN;
+        }else if(zahlentester.length() == 13 && checkISBN13(zahlen)){
+            this.ISBN = ISBN;
+        } else {
+            throw new IllegalArgumentException("Fehlerhafte ISBN!!!");
+        }
 
-        this.ISBN = ISBN;
     }
 
 

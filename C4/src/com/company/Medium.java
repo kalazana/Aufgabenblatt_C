@@ -14,7 +14,7 @@ public abstract class Medium {
      * @param titel the titel
      */
     public Medium(String titel){
-        this.titel = titel;
+        setTitel(titel);
     }       //abstrakte Definition für Titel (Grundgerüst) für alle anderen Klassen
 
     /**
@@ -32,7 +32,12 @@ public abstract class Medium {
      * @param titel the titel
      */
     public void setTitel(String titel) {
-        this.titel = titel;
+        if(titel == null || titel.equals("")) {
+            throw new IllegalArgumentException("Fehlerhafter Titel!");
+        }else{
+            this.titel = titel;
+        }
+
     }
 
     /**
