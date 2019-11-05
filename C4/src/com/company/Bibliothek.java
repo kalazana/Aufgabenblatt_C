@@ -24,6 +24,7 @@ public class Bibliothek {
         zettelkasten.addMedium(new CD ("1", "Apple (bea (EMI))", "The Beatles"));
         zettelkasten.addMedium(new Zeitschrift("Der Spiegel", "0038-7452",54,6));
         zettelkasten.addMedium(new ElektronischesMedium("Hochschule-Stralsund", "http://www.hochschule-stralsund.de"));
+        zettelkasten.addMedium(new CD("Live At Wembley", "Queen", "Parlophone (EMI)"));
 
 
        // zettelkasten.sort(); // für Aufgabe C.5
