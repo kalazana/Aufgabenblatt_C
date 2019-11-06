@@ -1,4 +1,7 @@
 package com.company;
+/**
+ * @author Florian Eimann
+ */
 
 /**
  * The type Cd.

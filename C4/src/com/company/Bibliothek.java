@@ -1,6 +1,9 @@
 package com.company;
 
-//Florian Eimann
+/**
+ * @author Florian Eimann
+ */
+
 
 import static com.company.Buch.checkISBN10;
 import static com.company.Buch.checkISBN13;
@@ -25,9 +28,11 @@ public class Bibliothek {
         zettelkasten.addMedium(new Zeitschrift("Der Spiegel", "0038-7452",54,6));
         zettelkasten.addMedium(new ElektronischesMedium("Hochschule-Stralsund", "http://www.hochschule-stralsund.de"));
         zettelkasten.addMedium(new CD("Live At Wembley", "Queen", "Parlophone (EMI)"));
-
-
+        zettelkasten.addMedium(new CD ("4", "Apple (bea (EMI))", "The Beatles"));
+        zettelkasten.addMedium(new CD ("4", "Apple (bea (EMI))", "The Beatles"));
+        zettelkasten.findMedium("4");
         zettelkasten.sort(true); // für Aufgabe C.5
+        zettelkasten.dropMedium("4");
 
         for (Medium medium : zettelkasten) {
             System.out.println(medium.calculateRepresentation());

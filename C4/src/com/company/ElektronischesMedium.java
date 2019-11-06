@@ -1,5 +1,8 @@
 package com.company;
 import java.net.URL;
+/**
+ * @author Florian Eimann
+ */
 
 /**
  * The type Elektronisches medium.

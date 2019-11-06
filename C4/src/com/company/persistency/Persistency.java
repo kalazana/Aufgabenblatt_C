@@ -1,4 +1,7 @@
 package com.company.persistency;
+/**
+ * @author Florian Eimann
+ */
 
 import com.company.Zettelkasten;
 

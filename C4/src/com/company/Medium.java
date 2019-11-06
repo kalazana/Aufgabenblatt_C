@@ -2,6 +2,10 @@ package com.company;
 import java.lang.reflect.Array;
 
 /**
+ * @author Florian Eimann
+ */
+
+/**
  * The type Medium.
  */
 public abstract class Medium implements Comparable<Medium>{

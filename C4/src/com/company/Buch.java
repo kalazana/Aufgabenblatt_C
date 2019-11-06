@@ -1,6 +1,10 @@
 package com.company;
 
 /**
+ * @author Florian Eimann
+ */
+
+/**
  * The type Buch.
  */
 public class Buch extends Medium{
@@ -74,6 +78,8 @@ public class Buch extends Medium{
     public void setISBN(String ISBN) {
         // [...] = Zeichenkategorie
         // ^ = Invertierung
+
+        //Mithilfe von Simon Biewald !!!
         String zahlentester = ISBN.replaceAll("[^0-9X]", "");  //eckige zeichen = zeichenkategorie
         int[] zahlen = new int[13];
         for(int i = 0; i< zahlentester.length(); i++) {
