@@ -23,9 +23,9 @@ public class Zeitschrift extends Medium{
      */
     public Zeitschrift(String _titel, String _ISSN, int _Volume, int _Nummer){      //Konstruktor für Zeitschrift
         super(_titel);
-        this.ISSN = _ISSN;
-        this.Volume = _Volume;
-        this.Nummer = _Nummer;
+        setISSN(_ISSN);
+        setVolume(_Volume);
+        setNummer(_Nummer);
 
     }
 
@@ -35,7 +35,12 @@ public class Zeitschrift extends Medium{
      * @param nummer the nummer
      */
     public void setNummer(int nummer) {
-        Nummer = nummer;
+        if(nummer<0) {
+            throw new IllegalArgumentException("Fehlerhafte Nummer!");
+        }else{
+            nummer = nummer;
+        }
+
     }
 
     /**
@@ -53,7 +58,11 @@ public class Zeitschrift extends Medium{
      * @param volume the volume
      */
     public void setVolume(int volume) {
-        Volume = volume;
+        if(volume<0) {
+            throw new IllegalArgumentException("Fehlerhaftes Volume!");
+        }else{
+            volume = volume;
+        }
     }
 
     /**
@@ -71,7 +80,12 @@ public class Zeitschrift extends Medium{
      * @param ISSN the issn
      */
     public void setISSN(String ISSN) {
+        if(ISSN == null || ISSN.equals("")) {
+            throw new IllegalArgumentException("Fehlerhafte ISSN!");
+        }else{
         this.ISSN = ISSN;
+        }
+
     }
 
     /**

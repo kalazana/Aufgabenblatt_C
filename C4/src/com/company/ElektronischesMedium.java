@@ -18,7 +18,7 @@ public class ElektronischesMedium extends Medium{
      */
     public ElektronischesMedium(String _titel, String _URL){  //Konstruktor für Elektronisches Medium
         super(_titel);
-        this.URL = _URL;
+        setURL(_URL);
 
     }
 
@@ -28,7 +28,11 @@ public class ElektronischesMedium extends Medium{
      * @param URL the url
      */
     public void setURL(String URL) {
-        this.URL = URL;
+    if (URL == null || URL.equals("")) {
+            throw new IllegalArgumentException("Fehlerhafte URL!");
+        }else{
+            this.URL = URL;
+        }
     }
 
     /**

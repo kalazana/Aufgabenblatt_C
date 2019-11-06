@@ -31,8 +31,9 @@ public class Bibliothek {
         zettelkasten.addMedium(new CD ("4", "Apple (bea (EMI))", "The Beatles"));
         zettelkasten.addMedium(new CD ("4", "Apple (bea (EMI))", "The Beatles"));
         zettelkasten.findMedium("4");
+        zettelkasten.addMedium(new Buch(" ", 890, "asfgsdfg", "3-411-04013-0"," " ));
         zettelkasten.sort(true); // für Aufgabe C.5
-        zettelkasten.dropMedium("4");
+        //zettelkasten.dropMedium("1");
 
         for (Medium medium : zettelkasten) {
             System.out.println(medium.calculateRepresentation());

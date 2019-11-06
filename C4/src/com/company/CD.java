@@ -20,8 +20,8 @@ public class CD extends Medium {
      */
     public CD(String _titel, String _label, String _kuenstler) {  //Konstruktor für CD
         super(_titel);
-        this.label = _label;
-        this.kuenstler = _kuenstler;
+        setLabel(_label);
+        setKuenstler(_kuenstler);
     }
 
 
@@ -40,7 +40,12 @@ public class CD extends Medium {
      * @param label the label
      */
     public void setLabel(String label) {
-        this.label = label;
+        if(label == null || label.equals("")) {
+            throw new IllegalArgumentException("Fehlerhaftes Lable!");
+        }else{
+            this.label = label;
+        }
+
     }
 
     /**
@@ -58,7 +63,12 @@ public class CD extends Medium {
      * @param kuenstler the kuenstler
      */
     public void setKuenstler(String kuenstler) {
-        this.kuenstler = kuenstler;
+        if(kuenstler == null || kuenstler.equals("")) {
+            throw new IllegalArgumentException("Fehlerhafter Kuenstler!");
+        }else{
+            this.kuenstler = kuenstler;
+        }
+
     }
 
     @Override
