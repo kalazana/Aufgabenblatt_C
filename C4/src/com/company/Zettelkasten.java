@@ -17,22 +17,41 @@ public class Zettelkasten implements Iterable<Medium> {
         sortierung = null;                          //weil Element hinzugefügt wurde, ist alte Sortierung hinfällig
         return true;
     }
-
+    private int n = 0;
     public boolean dropMedium(String titel)throws duplicateEntry{
+        List<Medium> dopplungen = new ArrayList<>();
         if(dopplungen.size()>1){
             for(Medium test : dopplungen){
                 if(test.getTitel().equals(titel)){
                     throw new duplicateEntry("duplicateEntry Exception");
-
                 }
                 else myZettelkasten.remove(findSingleMedium(titel));
-
             }
-
-
         }
         return myZettelkasten.remove(findSingleMedium(titel));
     }
+
+   /* public boolean dropMedium(String titel, int inder)throws duplicateEntry{
+
+        return myZettelkasten.remove(dopplungen.get(inder));
+    }
+    public boolean dropMedium(String titel, int index, int inde)throws duplicateEntry{
+
+        return myZettelkasten.remove(dopplungen.get(index))&&myZettelkasten.remove(dopplungen.get(inde));
+    }
+
+    */
+
+   /* public boolean dropAlleMedien(String titel){
+        boolean gelöscht = false;
+        for (Medium test5: findMedium(titel)) {
+            gelöscht |= myZettelkasten.remove(test5);
+        }
+        return gelöscht;
+    }*/
+
+
+
 
     public Medium findSingleMedium(String titel){
         for(Medium medium : myZettelkasten){
@@ -43,8 +62,9 @@ public class Zettelkasten implements Iterable<Medium> {
         return null;
 
     }
-    public List<Medium> dopplungen = new ArrayList<>();
+
     public List<Medium> findMedium(String titel) {
+        List<Medium> dopplungen = new ArrayList<>();
         for(Medium medium : myZettelkasten){
             if(medium.getTitel().equals(titel)){
                     dopplungen.add(medium);

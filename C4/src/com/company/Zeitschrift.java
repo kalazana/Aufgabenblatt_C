@@ -55,13 +55,13 @@ public class Zeitschrift extends Medium{
     /**
      * Sets volume.
      *
-     * @param volume the volume
+     * @param Volume the volume
      */
-    public void setVolume(int volume) {
-        if(volume<0) {
+    public void setVolume(int Volume) {
+        if(Volume<0) {
             throw new IllegalArgumentException("Fehlerhaftes Volume!");
         }else{
-            volume = volume;
+            Volume = Volume;
         }
     }
 
@@ -71,7 +71,7 @@ public class Zeitschrift extends Medium{
      * @return the volume
      */
     public int getVolume() {
-        return Volume;
+        return this.Volume;
     }
 
     /**
@@ -94,7 +94,7 @@ public class Zeitschrift extends Medium{
      * @return the issn
      */
     public String getISSN() {
-        return ISSN;
+        return this.ISSN;
     }
 
     @Override
