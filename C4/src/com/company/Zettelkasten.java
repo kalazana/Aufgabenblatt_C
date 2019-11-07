@@ -31,7 +31,6 @@ public class Zettelkasten implements Iterable<Medium> {
                     throw new duplicateEntry("duplicateEntry\n");
                 }
             }else if(!myZettelkasten.contains(findSingleMedium(titel))) {
-                System.out.println(myZettelkasten);
                 System.out.println("Titel ist nicht vorhanden!\n");
                 break;
             }else{
