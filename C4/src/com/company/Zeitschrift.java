@@ -28,7 +28,7 @@ public class Zeitschrift extends Medium{
         this.Nummer = setNummer(_Nummer);
 
     }
-
+    //test
     /**
      * Sets nummer.
      *
