@@ -19,20 +19,22 @@ public class Zettelkasten implements Iterable<Medium> {
         return true;
     }
     public boolean dropMedium(String titel)throws duplicateEntry{
-            for(Medium test : myZettelkasten){
+        List<Medium> dopplungen = new ArrayList<>();
+        if(dopplungen.size()>1){
+            for(Medium test : dopplungen){
                 if(test.getTitel().equals(titel)){
                     throw new duplicateEntry("duplicateEntry Exception");
                 }
+                else myZettelkasten.remove(findSingleMedium(titel));
             }
-
+        }
         return myZettelkasten.remove(findSingleMedium(titel));
     }
 
   public boolean dropMedium(String titel, int index)throws duplicateEntry{
         ArrayList<Medium> dopplungen = new ArrayList<>();
         for(Medium medium : myZettelkasten){
-
-              dopplungen.add(medium);
+            dopplungen.add(medium);
       }
         dopplungen.remove(index);
         return true;
