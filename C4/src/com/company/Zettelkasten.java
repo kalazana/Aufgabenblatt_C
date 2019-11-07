@@ -54,7 +54,7 @@ public class Zettelkasten implements Iterable<Medium> {
                 dopplungen.add(medium);
             }
       }
-        dopplungen.remove(index);
+        myZettelkasten.remove(dopplungen.get(index));
         System.out.println(dopplungen);
         return true;
 
