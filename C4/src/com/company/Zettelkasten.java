@@ -3,6 +3,7 @@ package com.company;
  * @author Florian Eimann
  */
 
+import javax.crypto.AEADBadTagException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -18,29 +19,44 @@ public class Zettelkasten implements Iterable<Medium> {
         sortierung = null;                          //weil Element hinzugefügt wurde, ist alte Sortierung hinfällig
         return true;
     }
-    public boolean dropMedium(String titel)throws duplicateEntry{
+    public void dropMedium(String titel)throws duplicateEntry {
         ArrayList<Medium> dopplungen = new ArrayList<>();
-            for(Medium test : myZettelkasten){
-                dopplungen.add(findSingleMedium(titel));
-                if(test.getTitel()==(null)){
-                    System.out.println("Titel wurde nicht gefunden!!!");
-                }else if(test.getTitel() == titel){
-                  dopplungen.remove(findSingleMedium(titel));
-                }
-                else{
-                    System.out.println("HAAALLOOO");
-                }
-            }
+        int test5 = 0;
+        for (Medium test : myZettelkasten) {
 
-        return true;
-    }
+            if (test.getTitel() == titel) {
+                dopplungen.add(test);
+                test5++;
+                if(dopplungen.size()>1){
+                    throw new duplicateEntry("duplicateEntry\n");
+                }
+            }else if(!myZettelkasten.contains(findSingleMedium(titel))) {
+                System.out.println(myZettelkasten);
+                System.out.println("Titel ist nicht vorhanden!\n");
+                break;
+            }else{
+            }
+            }
+        if(test5>0 && test5 <2){
+            myZettelkasten.remove(dopplungen.get(0));
+        }
+
+
+
+        }
+
+
+
 
   public boolean dropMedium(String titel, int index)throws duplicateEntry{
         ArrayList<Medium> dopplungen = new ArrayList<>();
         for(Medium medium : myZettelkasten){
-            dopplungen.add(medium);
+            if(medium.getTitel()==titel){
+                dopplungen.add(medium);
+            }
       }
-        myZettelkasten.remove(index);
+        dopplungen.remove(index);
+        System.out.println(dopplungen);
         return true;
 
     }
