@@ -29,7 +29,7 @@ public class Buch extends Medium{
         super(_titel);
         this.Erscheinungsjahr = setErscheinungsjahr(_Erscheinungsjahr);
         this.Verlag= setVerlag(_Verlag);
-       this.Verfasser = setVerfasser(_Verfasser);
+        this.Verfasser = setVerfasser(_Verfasser);
         setISBN(_ISBN);
 
     }

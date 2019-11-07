@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+
 public class Zettelkasten implements Iterable<Medium> {
 
     private ArrayList<Medium> myZettelkasten = new ArrayList<>();
@@ -17,48 +18,38 @@ public class Zettelkasten implements Iterable<Medium> {
         sortierung = null;                          //weil Element hinzugefügt wurde, ist alte Sortierung hinfällig
         return true;
     }
-    private int n = 0;
     public boolean dropMedium(String titel)throws duplicateEntry{
-        List<Medium> dopplungen = new ArrayList<>();
-        if(dopplungen.size()>1){
-            for(Medium test : dopplungen){
+            for(Medium test : myZettelkasten){
                 if(test.getTitel().equals(titel)){
                     throw new duplicateEntry("duplicateEntry Exception");
                 }
-                else myZettelkasten.remove(findSingleMedium(titel));
             }
-        }
+
         return myZettelkasten.remove(findSingleMedium(titel));
     }
 
-    public boolean dropMedium(String titel, int index)throws duplicateEntry{
-        List<Medium> dopplungen = new ArrayList<>();
-        for(Medium test : dopplungen){
-            if(test.getTitel().equals(titel)){
-                dopplungen.add(test);
-                index++;
-            }
-            myZettelkasten.remove(dopplungen.get(index));
-        }
+  public boolean dropMedium(String titel, int index)throws duplicateEntry{
+        ArrayList<Medium> dopplungen = new ArrayList<>();
+        for(Medium medium : myZettelkasten){
 
-        return myZettelkasten.remove(dopplungen.get(index));
+              dopplungen.add(medium);
+      }
+        dopplungen.remove(index);
+        return true;
     }
 
-
-
-
-
-
-    public boolean dropAlleMedien(String titel){
+    public boolean dropMedium(String titel, String alleLöschen){
+        if(alleLöschen == "ja"){
         boolean gelöscht = false;
         for (Medium test5: findMedium(titel)) {
             gelöscht |= myZettelkasten.remove(test5);
         }
         return gelöscht;
+        }else{
+            System.out.println("Biite geben sie 'ja' ein wenn sie alle Duplikate löschen möchten!");
+        }
+        return true;
     }
-
-
-
 
     public Medium findSingleMedium(String titel){
         for(Medium medium : myZettelkasten){
@@ -71,14 +62,14 @@ public class Zettelkasten implements Iterable<Medium> {
     }
 
     public List<Medium> findMedium(String titel) {
-        List<Medium> dopplungen = new ArrayList<>();
-        for(Medium medium : myZettelkasten){
-            if(medium.getTitel().equals(titel)){
+            List<Medium> dopplungen = new ArrayList<>();
+            for(Medium medium : myZettelkasten){
+                if(medium.getTitel().equals(titel)){
                     dopplungen.add(medium);
+                }
             }
-        }
 
-        return dopplungen;
+            return dopplungen;
 
     }
 
