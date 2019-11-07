@@ -24,8 +24,8 @@ public class Zeitschrift extends Medium{
     public Zeitschrift(String _titel, String _ISSN, int _Volume, int _Nummer){      //Konstruktor für Zeitschrift
         super(_titel);
         setISSN(_ISSN);
-        setVolume(_Volume);
-        setNummer(_Nummer);
+        this.Volume = setVolume(_Volume);
+        this.Nummer = setNummer(_Nummer);
 
     }
 
@@ -33,14 +33,16 @@ public class Zeitschrift extends Medium{
      * Sets nummer.
      *
      * @param nummer the nummer
+     * @return
      */
-    public void setNummer(int nummer) {
+    public int setNummer(int nummer) {
         if(nummer<0) {
             throw new IllegalArgumentException("Fehlerhafte Nummer!");
         }else{
             nummer = nummer;
         }
 
+        return nummer;
     }
 
     /**
@@ -56,13 +58,15 @@ public class Zeitschrift extends Medium{
      * Sets volume.
      *
      * @param Volume the volume
+     * @return
      */
-    public void setVolume(int Volume) {
+    public int setVolume(int Volume) {
         if(Volume<0) {
             throw new IllegalArgumentException("Fehlerhaftes Volume!");
         }else{
             Volume = Volume;
         }
+        return Volume;
     }
 
     /**

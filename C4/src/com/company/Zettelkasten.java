@@ -31,24 +31,31 @@ public class Zettelkasten implements Iterable<Medium> {
         return myZettelkasten.remove(findSingleMedium(titel));
     }
 
-   /* public boolean dropMedium(String titel, int inder)throws duplicateEntry{
+    public boolean dropMedium(String titel, int index)throws duplicateEntry{
+        List<Medium> dopplungen = new ArrayList<>();
+        for(Medium test : dopplungen){
+            if(test.getTitel().equals(titel)){
+                dopplungen.add(test);
+                index++;
+            }
+            myZettelkasten.remove(dopplungen.get(index));
+        }
 
-        return myZettelkasten.remove(dopplungen.get(inder));
+        return myZettelkasten.remove(dopplungen.get(index));
     }
-    public boolean dropMedium(String titel, int index, int inde)throws duplicateEntry{
 
-        return myZettelkasten.remove(dopplungen.get(index))&&myZettelkasten.remove(dopplungen.get(inde));
-    }
 
-    */
 
-   /* public boolean dropAlleMedien(String titel){
+
+
+
+    public boolean dropAlleMedien(String titel){
         boolean gelöscht = false;
         for (Medium test5: findMedium(titel)) {
             gelöscht |= myZettelkasten.remove(test5);
         }
         return gelöscht;
-    }*/
+    }
 
 
 
@@ -91,8 +98,9 @@ public class Zettelkasten implements Iterable<Medium> {
         }else{
             if(sortierung != null && sortierung.equals(false)){
                 return false;
+            }else{
+                Collections.sort(myZettelkasten, Collections.reverseOrder());
             }
-            Collections.sort(myZettelkasten, Collections.reverseOrder());
             sortierung = false;
        }
         return true;

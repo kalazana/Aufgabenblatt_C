@@ -27,9 +27,9 @@ public class Buch extends Medium{
      */
     public Buch(String _titel, int _Erscheinungsjahr, String _Verlag, String _ISBN, String _Verfasser){         //Konstruktor für Buch
         super(_titel);
-        setErscheinungsjahr(_Erscheinungsjahr);
-        setVerlag(_Verlag);
-        setVerfasser(_Verfasser);
+        this.Erscheinungsjahr = setErscheinungsjahr(_Erscheinungsjahr);
+        this.Verlag= setVerlag(_Verlag);
+       this.Verfasser = setVerfasser(_Verfasser);
         setISBN(_ISBN);
 
     }
@@ -56,13 +56,15 @@ public class Buch extends Medium{
      * Sets verfasser.
      *
      * @param verfasser the verfasser
+     * @return
      */
-    public void setVerfasser(String verfasser) {
+    public String setVerfasser(String verfasser) {
         if(verfasser == null || verfasser.equals("")) {
             throw new IllegalArgumentException("Fehlerhafter Verfasser!");
         }else{
             this.Verfasser = Verfasser;
         }
+        return verfasser;
     }
 
     /**
@@ -71,7 +73,7 @@ public class Buch extends Medium{
      * @return the verfasser
      */
     public String getVerfasser() {
-        return Verfasser;
+        return this.Verfasser = Verfasser;
     }
 
     /**
@@ -120,14 +122,16 @@ public class Buch extends Medium{
      * Sets verlag.
      *
      * @param verlag the verlag
+     * @return
      */
-    public void setVerlag(String verlag) {
+    public String setVerlag(String verlag) {
         if(verlag == null || verlag.equals("")) {
-            throw new IllegalArgumentException("Fehlerhafter Verfasser!");
+            throw new IllegalArgumentException("Fehlerhafter Verlag!");
         }else{
             this.Verlag = Verlag;
         }
 
+        return verlag;
     }
 
     /**
@@ -144,13 +148,15 @@ public class Buch extends Medium{
      * Sets erscheinungsjahr.
      *
      * @param erscheinungsjahr the erscheinungsjahr
+     * @return
      */
-    public void setErscheinungsjahr(int erscheinungsjahr) {
+    public int setErscheinungsjahr(int erscheinungsjahr) {
         if(erscheinungsjahr<870) {
             throw new IllegalArgumentException("Fehlerhaftes Erscheinungsjahr: https://www.history.de/news/detail/das-aelteste-buch-der-welt.html");
         }else{
             erscheinungsjahr = erscheinungsjahr;
         }
+        return erscheinungsjahr;
     }
 
     /**
