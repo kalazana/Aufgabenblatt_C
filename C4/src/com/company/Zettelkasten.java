@@ -4,10 +4,7 @@ package com.company;
  */
 
 import javax.crypto.AEADBadTagException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 
 public class Zettelkasten implements Iterable<Medium> {
@@ -84,20 +81,48 @@ public class Zettelkasten implements Iterable<Medium> {
     }
 
     public List<Medium> findMedium(String titel) {
+        int i = 0;
             List<Medium> dopplungen = new ArrayList<>();
+            List<Medium> dopplungenSortiert = new ArrayList<>();
+            List<Medium> Zeitschrift = new ArrayList<>();
+            List<Medium> CD = new ArrayList<>();
+            List<Medium> Buch = new ArrayList<>();
+            List<Medium> ElektronischesMedium = new ArrayList<>();
+
             for(Medium medium : myZettelkasten){
                 if(medium.getTitel().equals(titel)){
                     dopplungen.add(medium);
+                    if(medium.getClass().getName()=="com.company.Zeitschrift"){
+                        Zeitschrift.add(medium);
+                    }else if(medium.getClass().getName()=="com.company.CD") {
+                        CD.add(medium);
+                    }else if(medium.getClass().getName()=="com.company.Buch"){
+                        Buch.add(medium);
+                    }else if(medium.getClass().getName()=="com.company.ElektronischesMedium"){
+                        ElektronischesMedium.add(medium);
+                    }else{
+                        i++;
+                    }
                 }
+
             }
 
-            return dopplungen;
+            dopplungenSortiert.addAll(Zeitschrift);
+            dopplungenSortiert.addAll(CD);
+            dopplungenSortiert.addAll(Buch);
+            dopplungenSortiert.addAll(ElektronischesMedium);
 
+
+
+
+        return dopplungenSortiert;
     }
 
     public Iterator iterator(){
         return myZettelkasten.iterator();
     }
+
+
     Boolean sortierung = null;          //null unsortiert, true absteigend sortiert, false aufsteigend sortiert
     public boolean sort(boolean absteigend){
         if(absteigend==true){
@@ -119,6 +144,4 @@ public class Zettelkasten implements Iterable<Medium> {
         return true;
 
     }
-
-
 }
