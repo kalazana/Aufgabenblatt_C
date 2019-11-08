@@ -79,7 +79,7 @@ public class Zettelkasten implements Iterable<Medium> {
         return null;
 
     }
-
+    //test
     public List<Medium> findMedium(String titel) {
         int i = 0;
             List<Medium> dopplungen = new ArrayList<>();
