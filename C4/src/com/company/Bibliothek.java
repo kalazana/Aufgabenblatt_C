@@ -46,7 +46,7 @@ public class Bibliothek {
             System.out.println();
         //}
 
-        final String query = "SELECT * FROM MEDIEN";
+       final String query = "SELECT * FROM MEDIEN WHERE TYP = 'Buch'";
 
         try(
                 Connection con = createConnection();
@@ -58,9 +58,14 @@ public class Bibliothek {
                 String titel = result.getString("TITEL");
                 String label = result.getString("LABEL");
                 String kuenstler = result.getString("KUENSTLER");
-
-
-                System.out.printf("MEDIEN_ID: %s, Typ: %s, titel: %s, Label: %s, Kuenstler: %s%n", id, typ, titel, label, kuenstler);
+                String ISSN = result.getString("ISSN");
+                String URL = result.getString("URL");
+                String Nummer = result.getString("NUMMER");
+                String Volume= result.getString("VOLUME");
+                String Erscheinungsjahr = result.getString("ERSCHEINUNGSJAHR");
+                String Verlag = result.getString("VERLAG");
+                String Verfasser = result.getString("VERFASSER");
+                System.out.printf("MEDIEN_ID: %s, Typ: %s, titel: %s, Label: %s, Kuenstler: %s, ISSN: %s, URL: %s, Nummer: %s, Volume: %s, Erscheinungsjahr: %s, Verlag: %s, Verfasser %s%n", id, typ, titel, label, kuenstler, ISSN, URL, Nummer,Volume, Erscheinungsjahr, Verlag, Verfasser);
             }
         }catch(ClassNotFoundException|SQLException e){
             e.printStackTrace();
@@ -70,7 +75,7 @@ public class Bibliothek {
 
 
 
-        try(
+       try(
             Connection con = createConnection();
             Statement statement = con.createStatement();){
 
@@ -78,14 +83,14 @@ public class Bibliothek {
             DatabaseMetaData metaData = con.getMetaData();
             ResultSet tables = metaData.getTables(null, null, "Medien",null);
 
-            if(!tables.next()){
-                statement.execute(dbSaveerstellen());
-            }
+           // if(!tables.next()){
+             //   statement.execute(dbSaveerstellen());
+            //}
 
             statement.executeUpdate(buildInsertStatement("CD","4","Apple","Test"));
-            statement.executeUpdate(buildInsertStatement("CD1","56","Ap456ple","Tessdft"));
-            statement.executeUpdate(buildInsertStatement("CD2","456","Appsdfgle","Tesdfgst"));
-            statement.executeUpdate(buildInsertStatement("BUCH","4sdf","Apfsdgple","Tefdsgsdfgst"));
+            statement.executeUpdate(buildInsertStatement("ElektronischesMedium","test27","host.de"));
+            statement.executeUpdate(buildInsertStatement("Zeitschrift","holger","4564356","37","42"));
+            statement.executeUpdate(buildInsertStatement("Buch", "test", "27","test","test","test"));
 
         }catch (SQLException | ClassNotFoundException e){
             e.printStackTrace();
@@ -105,7 +110,20 @@ public class Bibliothek {
     private static String buildInsertStatement(String typ, String titel, String label, String kuenstler) {
         return new StringBuilder("INSERT INTO MEDIEN").append("(TYP, TITEL, LABEL, KUENSTLER)").append(String.format("VALUES('%s','%s','%s','%s')", typ, titel, label, kuenstler)).toString();
     }
-    private static String dbSaveerstellen(){
+
+
+
+    private static String buildInsertStatement (String typ, String titel,String erscheinungsjahr, String verlag, String
+            ISBN, String verfasser){
+        return new StringBuilder("INSERT INTO MEDIEN").append("(TYP, TITEL, ERSCHEINUNGSJAHR, VERLAG, ISBN, VERFASSER)").append(String.format("VALUES('%s','%s','%s','%s', '%s', '%s')", typ, titel, erscheinungsjahr, verlag, ISBN, verfasser)).toString();
+    }
+    private static String buildInsertStatement (String typ, String titel,String ISSN, String volume, String nummer){
+        return new StringBuilder("INSERT INTO MEDIEN").append("(TYP, TITEL, ISSN, VOLUME, NUMMER)").append(String.format("VALUES('%s','%s','%s','%s', '%s')", typ, titel, ISSN, volume, nummer)).toString();
+    }
+    private static String buildInsertStatement (String typ, String titel,String URL){
+        return new StringBuilder("INSERT INTO MEDIEN").append("(TYP, TITEL, URL)").append(String.format("VALUES('%s','%s','%s')", typ, titel, URL)).toString();
+    }
+    private static String dbSaveerstellen() {
         String nl = System.lineSeparator();
         return new StringBuilder()
                 .append("CREATE TABLE MEDIEN").append(nl)
@@ -115,7 +133,20 @@ public class Bibliothek {
                 .append("  TITEL VARCHAR(32),").append(nl)
                 .append("  LABEL VARCHAR(32),").append(nl)
                 .append("  KUENSTLER VARCHAR(32),")
+                .append("  ERSCHEINUNGSJAHR VARCHAR(32),")
+                .append("  VERLAG VARCHAR(32),")
+                .append("  ISBN VARCHAR(32),")
+                .append("  VERFASSER VARCHAR(32),")
+                .append("  ISSN VARCHAR(32),")
+                .append("  VOLUME VARCHAR(32),")
+                .append("  NUMMER VARCHAR(32),")
+                .append("  URL VARCHAR(32),")
                 .append("  PRIMARY KEY(ID)").append(")").toString();
 
+
+    }
+
+
+
 }
-}
+
