@@ -13,3 +13,6 @@ public interface Persistency {
     public Zettelkasten load(String dateiname)throws IOException, ClassNotFoundException;
 
 }
+
+
+
