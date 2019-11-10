@@ -39,7 +39,7 @@ public class CD extends Medium {
      *
      * @param label the label
      */
-    public void setLabel(String label) {
+    public void setLabel(String label) {                                //Label wird überprüft ob er null oder leerer String ist, wenn nicht wird der Label gesetzt, ansosnten kommt eine Fehlermeldung
         if(label == null || label.equals("")) {
             throw new IllegalArgumentException("Fehlerhaftes Lable!");
         }else{
@@ -62,7 +62,7 @@ public class CD extends Medium {
      *
      * @param kuenstler the kuenstler
      */
-    public void setKuenstler(String kuenstler) {
+    public void setKuenstler(String kuenstler) {            //Kuenstler wird überprüft ob er null oder leerer String ist, wenn nicht wird der Kuenstler gesetzt, ansosnten kommt eine Fehlermeldung
         if(kuenstler == null || kuenstler.equals("")) {
             throw new IllegalArgumentException("Fehlerhafter Kuenstler!");
         }else{

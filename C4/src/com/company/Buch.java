@@ -36,7 +36,7 @@ public class Buch extends Medium{
 
 
 
-    public String calculateRepresentation() {
+    public String calculateRepresentation() {                                   //Stringbuilder für Buch
         StringBuilder Bch = new StringBuilder();
         return Bch.append("Titel: ")
                 .append(getTitel())
@@ -58,7 +58,7 @@ public class Buch extends Medium{
      * @param verfasser the verfasser
      * @return
      */
-    public String setVerfasser(String verfasser) {
+    public String setVerfasser(String verfasser) {                              //Verfasser wird überprüft ob er null oder leerer String ist, wenn nicht wird der Verfasser gesetzt, ansosnten kommt eine Fehlermeldung
         if(verfasser == null || verfasser.equals("")) {
             throw new IllegalArgumentException("Fehlerhafter Verfasser!");
         }else{
@@ -86,22 +86,22 @@ public class Buch extends Medium{
         // ^ = Invertierung
 
         //Mithilfe von Simon Biewald !!!
-        String zahlentester = ISBN.replaceAll("[^0-9X]", "");  //eckige zeichen = zeichenkategorie
-        int[] zahlen = new int[13];
-        for(int i = 0; i< zahlentester.length(); i++) {
+        String zahlentester = ISBN.replaceAll("[^0-9X]", "");  //eckige zeichen = zeichenkategorie; ZAhlen von 0-9 sind erlaubt, sowei x, alles andere wird entfernt (weil bindestriche
+        int[] zahlen = new int[13];                                              //erstellt ein nuees maximaL 13 zeichen großes array, 0-9 und x sind erlaubt , alles andere wird ersetzt (weil Bindestriche bei ISBN sind)
+        for(int i = 0; i< zahlentester.length(); i++) {                          //for schleife die das array durch geht
             char c = zahlentester.charAt(i);
-            if(c == 'X') {
+            if(c == 'X') {                                                       //ersetzt das Zeichen X durch 10
                 zahlen[i] = 10;
             }else{
                 zahlen[i] = c;
             }
         }
-        if(zahlentester.length() == 10 && checkISBN10(zahlen)){
+        if(zahlentester.length() == 10 && checkISBN10(zahlen)){                 //ISBN checker 10 wird getestet wenn bedingung der länge erfüllt ist
             this.ISBN = ISBN;
-        }else if(zahlentester.length() == 13 && checkISBN13(zahlen)){
+        }else if(zahlentester.length() == 13 && checkISBN13(zahlen)){           //ISBN 13 checker wird getestet, wenn bedingung stimmt dass die länge 13 ist
             this.ISBN = ISBN;
         } else {
-            throw new IllegalArgumentException("Fehlerhafte ISBN!!!");
+            throw new IllegalArgumentException("Fehlerhafte ISBN!!!");          //falls isbn andere länge hat wird diese Fehlermeldung ausgegeben
         }
 
     }
@@ -124,7 +124,7 @@ public class Buch extends Medium{
      * @param verlag the verlag
      * @return
      */
-    public String setVerlag(String verlag) {
+    public String setVerlag(String verlag) {                            //Verlag wird überprüft ob er null oder leerer String ist, wenn nicht wird der Verlag gesetzt, ansosnten kommt eine Fehlermeldung
         if(verlag == null || verlag.equals("")) {
             throw new IllegalArgumentException("Fehlerhafter Verlag!");
         }else{
@@ -150,7 +150,7 @@ public class Buch extends Medium{
      * @param erscheinungsjahr the erscheinungsjahr
      * @return
      */
-    public int setErscheinungsjahr(int erscheinungsjahr) {
+    public int setErscheinungsjahr(int erscheinungsjahr) {                  //falls Erscheinungsjahr vor 870 angegeben wird, wird fehlermedlung ausgegeben (siehe link für begrüdnung)
         if(erscheinungsjahr<870) {
             throw new IllegalArgumentException("Fehlerhaftes Erscheinungsjahr: https://www.history.de/news/detail/das-aelteste-buch-der-welt.html");
         }else{
@@ -176,7 +176,7 @@ public class Buch extends Medium{
      * @param isbn the isbn
      * @return the boolean
      */
-    public static boolean checkISBN10(int[] isbn) {  //Methode zur Überprüfung ider ISBN auf korrektheit, wird in der Main mit jeweils einem Beispeil überprüft
+    public static boolean checkISBN10(int[] isbn) {  //Methode zur Überprüfung ider ISBN auf korrektheit, wird in der Main mit jeweils einem Beispiel überprüft
         int sum = 0;
         for (int i = 1; i <= isbn.length; i++) {
             sum += i * isbn[i - 1];
@@ -194,7 +194,7 @@ public class Buch extends Medium{
      * @param isbn the isbn
      * @return the boolean
      */
-    public static boolean checkISBN13(int[] isbn) {  //Methode zur Überprüfung ider ISBN auf korrektheit, wird in der Main mit jeweils einem Beispeil überprüft
+    public static boolean checkISBN13(int[] isbn) {  //Methode zur Überprüfung ider ISBN auf korrektheit, wird in der Main mit jeweils einem Beispiel überprüft
         int sum = 0;
         for (int i = 1; i < isbn.length; i++) {
             if (i % 2 == 0) {

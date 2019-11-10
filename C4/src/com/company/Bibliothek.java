@@ -122,7 +122,7 @@ public class Bibliothek {
     }
 
 
-    private static String dbSaveerstellen() {                                                                   //Stringbuilder für die Medien
+    private static String dbSaveerstellen() {                                                                   //Stringbuilder für die Medien, Attribute eingebaut da für alle Medien der selbe String Builder verwendet wird
         String nl = System.lineSeparator();
         return new StringBuilder()
                 .append("CREATE TABLE MEDIEN").append(nl)
