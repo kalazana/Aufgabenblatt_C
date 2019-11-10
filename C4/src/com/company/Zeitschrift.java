@@ -35,7 +35,7 @@ public class Zeitschrift extends Medium{
      * @param nummer the nummer
      * @return
      */
-    public int setNummer(int nummer) {
+    public int setNummer(int nummer) {                                          //falls die Nummer kleiner Null ist wird eine Fehlermedlung zurückgegeben
         if(nummer<0) {
             throw new IllegalArgumentException("Fehlerhafte Nummer!");
         }else{
@@ -60,7 +60,7 @@ public class Zeitschrift extends Medium{
      * @param Volume the volume
      * @return
      */
-    public int setVolume(int Volume) {
+    public int setVolume(int Volume) {                                           //falls das Volume kleiner Null ist wird eine Fehlermedlung zurückgegeben
         if(Volume<0) {
             throw new IllegalArgumentException("Fehlerhaftes Volume!");
         }else{
@@ -84,7 +84,7 @@ public class Zeitschrift extends Medium{
      * @param ISSN the issn
      */
     public void setISSN(String ISSN) {
-        if(ISSN == null || ISSN.equals("")) {
+        if(ISSN == null || ISSN.equals("")) {                               //falls ISSN null oder leerem String entspricht wird eine Fehlermedlung ausgegeben
             throw new IllegalArgumentException("Fehlerhafte ISSN!");
         }else{
         this.ISSN = ISSN;

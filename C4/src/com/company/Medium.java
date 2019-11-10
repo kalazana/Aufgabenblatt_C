@@ -19,7 +19,7 @@ public abstract class Medium implements Comparable<Medium>{
      */
     public Medium(String titel){
         setTitel(titel);
-    }       //abstrakte Definition für Titel (Grundgerüst) für alle anderen Klassen
+    }                                        //abstrakte Definition für Titel (Grundgerüst) für alle anderen Klassen
 
     /**
      * Gets titel.
@@ -35,7 +35,7 @@ public abstract class Medium implements Comparable<Medium>{
      *
      * @param titel the titel
      */
-    public void setTitel(String titel) {
+    public void setTitel(String titel) {                                    //zur Überprüfung ob Titel = null oder leerer String ist, gibt dann Fehlermeldung zurück
         if(titel == null || titel.equals("")) {
             throw new IllegalArgumentException("Fehlerhafter Titel!");
         }else{
@@ -52,7 +52,7 @@ public abstract class Medium implements Comparable<Medium>{
     public abstract String calculateRepresentation();       //für die Vererbung der Methode in die anderen Klassen
 
     @Override
-    public int compareTo(Medium medium) {
+    public int compareTo(Medium medium) {                           //Grundklasse für claculateRepresentation in den anderen Klassen/Methoden
         return this.getTitel().compareTo(medium.getTitel());
     }
 }

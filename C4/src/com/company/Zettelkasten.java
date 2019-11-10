@@ -3,7 +3,6 @@ package com.company;
  * @author Florian Eimann
  */
 
-import javax.crypto.AEADBadTagException;
 import java.util.*;
 
 
@@ -18,22 +17,20 @@ public class Zettelkasten implements Iterable<Medium> {
     }
     public void dropMedium(String titel)throws duplicateEntry {
         ArrayList<Medium> dopplungen = new ArrayList<>();
-        int test5 = 0;
-        for (Medium test : myZettelkasten) {
+        for (Medium medium : myZettelkasten) {
 
-            if (test.getTitel() == titel) {
-                dopplungen.add(test);
-                test5++;
-                if(dopplungen.size()>1){
+            if (medium.getTitel() == titel) {                       //falls der Titel des Mediums dem gesuchten/eingegebenen Titel übereinstimmt füge der ArrayList dopplungen
+                dopplungen.add(medium);
+                if(dopplungen.size()>1){                            //Falls die Anzahl der Elemente in Dopplungen größer ist als 1 wirft er eine neue Fehlermedlung duplicate entry da das gesuchte Element 2 mal vorhanden ist
                     throw new duplicateEntry("duplicateEntry\n");
                 }
-            }else if(!myZettelkasten.contains(findSingleMedium(titel))) {
+            }else if(!myZettelkasten.contains(findMedium(titel))) { //falls der Titel in der schon gefüllten ArrayList myZettelkasten nicht vorhanden ist wird die Fehlermedlung zurückgegeben und die Schleife wird abgebrochen
                 System.out.println("Titel ist nicht vorhanden!\n");
                 break;
             }else{
             }
             }
-        if(test5>0 && test5 <2){
+        if(dopplungen.size()==1){                                       //Falls in der ArrayList genau ein Element gefunden wurde was ddem einegebenen String entspricht wird es gelöscht
             myZettelkasten.remove(dopplungen.get(0));
         }
 
@@ -44,7 +41,7 @@ public class Zettelkasten implements Iterable<Medium> {
 
 
 
-  public boolean dropMedium(String titel, int index)throws duplicateEntry{
+  public boolean dropMedium(String titel, int index){
         ArrayList<Medium> dopplungen = new ArrayList<>();
         for(Medium medium : myZettelkasten){
             if(medium.getTitel()==titel){

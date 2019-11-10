@@ -8,7 +8,7 @@ import java.net.URL;
  * The type Elektronisches medium.
  */
 public class ElektronischesMedium extends Medium{
-    private String URL;
+    private String URL;                                        //String für die URL
 
     /**
      * Instantiates a new Elektronisches medium.
@@ -17,8 +17,8 @@ public class ElektronischesMedium extends Medium{
      * @param _URL   the url
      */
     public ElektronischesMedium(String _titel, String _URL){  //Konstruktor für Elektronisches Medium
-        super(_titel);
-        setURL(_URL);
+        super(_titel);                                          //aus Klasse Medium
+        setURL(_URL);                                           //so gemacht damit im setter direkt überprüft wird ob die URL stimmt
 
     }
 
@@ -28,8 +28,8 @@ public class ElektronischesMedium extends Medium{
      * @param URL the url
      */
     public void setURL(String URL) {
-    if (URL == null || URL.equals("")) {
-            throw new IllegalArgumentException("Fehlerhafte URL!");
+    if (!checkURL(URL)) {
+            throw new IllegalArgumentException("Fehlerhafte URL!");         //setter für URL mit Fehlermeldung falls URL mithilfe der check URL Methode als fehlerhaft gekennzeichnet wird
         }else{
             this.URL = URL;
         }
@@ -51,7 +51,7 @@ public class ElektronischesMedium extends Medium{
      * @param urlString the url string
      * @return the boolean
      */
-    public static boolean checkURL(String urlString)            //Zur überprüfung ob eine eingegebene URL existiert, wird in der Main überprüft mit einem Beispiel
+    public static boolean checkURL(String urlString)            //Zur überprüfung ob eine eingegebene URL existiert
     {
         try
         {

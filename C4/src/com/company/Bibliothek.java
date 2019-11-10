@@ -29,7 +29,7 @@ public class Bibliothek {
         zettelkasten.addMedium(new CD("Live at Wembley", "Queen", "Parlophone (EMI)"));
         zettelkasten.sort(true); //
 
-        //zettelkasten.dropMedium("4",1);
+        //zettelkasten.dropMedium("Der Spiegel");
         //zettelkasten.findSingleMedium("4");
         //System.out.println(zettelkasten.findSingleMedium("Der Spiegel"));
         //System.out.println();
@@ -45,7 +45,7 @@ public class Bibliothek {
 
 
 
-        //gesamte Datenbank basiert auf der Vorlesung von Dr. Pieper
+        //gesamte Datenbank basiert auf der Vorlesung von Dr. Pieper (Apache Derby)
        final String query = "SELECT * FROM MEDIEN WHERE TYP = 'Buch'";              //Ab hier beginnt die Datenbank, SQL Anweisung zum auswählen was angezeigt werden soll
 
         try(
