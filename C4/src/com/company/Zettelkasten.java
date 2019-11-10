@@ -74,6 +74,7 @@ public class Zettelkasten implements Iterable<Medium> {
         for(Medium medium : myZettelkasten){
             if(medium.getTitel().equals(titel)){
                 return medium;
+
             }
         }
         return null;

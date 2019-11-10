@@ -5,12 +5,8 @@ package com.company;
  */
 
 
-import javax.xml.transform.Result;
-import java.sql.*;
 
-import static com.company.Buch.checkISBN10;
-import static com.company.Buch.checkISBN13;
-import static com.company.ElektronischesMedium.checkURL;
+import java.sql.*;
 
 /**
  * The type Bibliothek.
@@ -26,34 +22,38 @@ public class Bibliothek {
     public static void main(String[] args) {
        Zettelkasten zettelkasten = new Zettelkasten();
 
-        zettelkasten.addMedium(new Buch("1", 2004, "Bibliographisches Institut, Mannheim","3-411-04013-0","-" ));  //Setzt die Strings für die jeweiligen Objekte
-        zettelkasten.addMedium(new CD ("2", "Apple (bea (EMI))", "The Beatles"));
-        zettelkasten.addMedium(new Buch("4", 2004, "Bibliographisches Institut, Mannheim","3-411-04013-0","-" ));
-        zettelkasten.addMedium(new Zeitschrift("4", "0038-7452",54,6));
-        zettelkasten.addMedium(new ElektronischesMedium("4", "http://www.hochschule-stralsund.de"));
-        zettelkasten.addMedium(new CD("4", "Queen", "Parlophone (EMI)"));
-        zettelkasten.addMedium(new Zeitschrift("4", "0038-7452",54,6));
-        //zettelkasten.addMedium(new CD ("4", "Apple (bea (1)", "The Beatles"));
-        //zettelkasten.addMedium(new CD ("4", "Apple (bea (2)", "The Beatles"));
-        //zettelkasten.addMedium(new CD ("4", "Apple (bea (3)", "The Beatles"));
-       // zettelkasten.addMedium(new Buch("4", 890, "asfgsdfg", "3-411-04013-0","-" ));
-        //zettelkasten.sort(true); // für Aufgabe C.5
-       // zettelkasten.dropMedium("4",1);
+        zettelkasten.addMedium(new  Buch("Duden 01. Die deutsche Rechtschreibung", 2004, "Bibliographisches Institut, Mannheim","3-411-04013-0","-" ));  //Setzt die Strings für die jeweiligen Objekte
+        zettelkasten.addMedium(new CD ("Beatles-CD", "Apple (bea (EMI))", "The Beatles"));
+        zettelkasten.addMedium(new Zeitschrift("Der Spiegel", "0038-7452",54,6));
+        zettelkasten.addMedium(new ElektronischesMedium("Hochschule-Stralsund", "http://www.hochschule-stralsund.de"));
+        zettelkasten.addMedium(new CD("Live at Wembley", "Queen", "Parlophone (EMI)"));
+        zettelkasten.sort(true); //
+
+        //zettelkasten.dropMedium("4",1);
         //zettelkasten.findSingleMedium("4");
-        //for(Medium medium : zettelkasten){
+        //System.out.println(zettelkasten.findSingleMedium("Der Spiegel"));
+        //System.out.println();
 
-            System.out.println(zettelkasten.findMedium("4"));
-            System.out.println();
-        //}
+        for(Medium medium : zettelkasten){
+            System.out.println(medium.calculateRepresentation());
+            System.out.println();                                   //hinzugefügt für bessere lesbarkeit der Ausgabe, kann wenn nicht benötigt wird einfach entfernt werden
 
-       final String query = "SELECT * FROM MEDIEN WHERE TYP = 'Buch'";
+        }
+
+
+
+
+
+
+        //gesamte Datenbank basiert auf der Vorlesung von Dr. Pieper
+       final String query = "SELECT * FROM MEDIEN WHERE TYP = 'Buch'";              //Ab hier beginnt die Datenbank, SQL Anweisung zum auswählen was angezeigt werden soll
 
         try(
-                Connection con = createConnection();
+                Connection con = createConnection();                                 //stellt Verbidnung zur Datenbank her, hier wird ausgegebenn was in der Datenbank alles exisitiert (und der SQL anweisung entspricht
                 Statement statement = con.createStatement();) {
             ResultSet result = statement.executeQuery(query);
-            while (result.next()) {
-                String id = result.getString("ID");
+            while (result.next()) {                                                  //while Schleife zum durchgehen der gesamten Datenbank
+                String id = result.getString("ID");                       //einzelne Kategorien die jedes Objekt hat (wenn das Obekt diese nicht besitzt wird es automatisch auf null gesetzt)
                 String typ = result.getString("TYP");
                 String titel = result.getString("TITEL");
                 String label = result.getString("LABEL");
@@ -70,12 +70,9 @@ public class Bibliothek {
         }catch(ClassNotFoundException|SQLException e){
             e.printStackTrace();
 
-
             }
 
-
-
-       try(
+       try(                                                             //hier werden Daten erstellt und in die Datenbank eingelesen
             Connection con = createConnection();
             Statement statement = con.createStatement();){
 
@@ -83,11 +80,11 @@ public class Bibliothek {
             DatabaseMetaData metaData = con.getMetaData();
             ResultSet tables = metaData.getTables(null, null, "Medien",null);
 
-           // if(!tables.next()){
-             //   statement.execute(dbSaveerstellen());
-            //}
+           if(!tables.next()){
+                statement.execute(dbSaveerstellen());               //wenn Datenbank noch aktuell ist wird sie nicht geupdatet
+            }
 
-            statement.executeUpdate(buildInsertStatement("CD","4","Apple","Test"));
+            statement.executeUpdate(buildInsertStatement("CD","4","Apple","Test"));             //einfügen der Elemente in die Datenbank
             statement.executeUpdate(buildInsertStatement("ElektronischesMedium","test27","host.de"));
             statement.executeUpdate(buildInsertStatement("Zeitschrift","holger","4564356","37","42"));
             statement.executeUpdate(buildInsertStatement("Buch", "test", "27","test","test","test"));
@@ -98,7 +95,7 @@ public class Bibliothek {
 
     }
 
-    private static Connection createConnection() throws ClassNotFoundException, SQLException{
+    private static Connection createConnection() throws ClassNotFoundException, SQLException{               //Verbindung der Datenbank und IntelliJ, gibt Speicherort an
         Class.forName("org.apache.derby.impl.jdbc.EmbedConnection");
         Connection connection = DriverManager.getConnection("jdbc:derby:db/Medien;create=true");
         return connection;
@@ -106,24 +103,26 @@ public class Bibliothek {
 
 
 
-
-    private static String buildInsertStatement(String typ, String titel, String label, String kuenstler) {
+                                                                                                                                //überladene Methoden für die verschiedenen Medien
+    private static String buildInsertStatement(String typ, String titel, String label, String kuenstler) {                      //für CD
         return new StringBuilder("INSERT INTO MEDIEN").append("(TYP, TITEL, LABEL, KUENSTLER)").append(String.format("VALUES('%s','%s','%s','%s')", typ, titel, label, kuenstler)).toString();
     }
 
-
-
-    private static String buildInsertStatement (String typ, String titel,String erscheinungsjahr, String verlag, String
+    private static String buildInsertStatement (String typ, String titel,String erscheinungsjahr, String verlag, String                 //für Buch
             ISBN, String verfasser){
         return new StringBuilder("INSERT INTO MEDIEN").append("(TYP, TITEL, ERSCHEINUNGSJAHR, VERLAG, ISBN, VERFASSER)").append(String.format("VALUES('%s','%s','%s','%s', '%s', '%s')", typ, titel, erscheinungsjahr, verlag, ISBN, verfasser)).toString();
     }
-    private static String buildInsertStatement (String typ, String titel,String ISSN, String volume, String nummer){
+
+    private static String buildInsertStatement (String typ, String titel,String ISSN, String volume, String nummer){                     //für Zeitschrift
         return new StringBuilder("INSERT INTO MEDIEN").append("(TYP, TITEL, ISSN, VOLUME, NUMMER)").append(String.format("VALUES('%s','%s','%s','%s', '%s')", typ, titel, ISSN, volume, nummer)).toString();
     }
-    private static String buildInsertStatement (String typ, String titel,String URL){
+
+    private static String buildInsertStatement (String typ, String titel,String URL){                                                       //für ElektronischesMedium
         return new StringBuilder("INSERT INTO MEDIEN").append("(TYP, TITEL, URL)").append(String.format("VALUES('%s','%s','%s')", typ, titel, URL)).toString();
     }
-    private static String dbSaveerstellen() {
+
+
+    private static String dbSaveerstellen() {                                                                   //Stringbuilder für die Medien
         String nl = System.lineSeparator();
         return new StringBuilder()
                 .append("CREATE TABLE MEDIEN").append(nl)
