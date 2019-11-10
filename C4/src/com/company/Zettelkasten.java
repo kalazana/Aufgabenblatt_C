@@ -33,15 +33,10 @@ public class Zettelkasten implements Iterable<Medium> {
         if(dopplungen.size()==1){                                       //Falls in der ArrayList genau ein Element gefunden wurde was ddem einegebenen String entspricht wird es gelöscht
             myZettelkasten.remove(dopplungen.get(0));
         }
-
-
-
         }
 
 
-
-
-  public boolean dropMedium(String titel, int index){
+  public boolean dropMedium(String titel, int index){                   //Drop Methode für Dopplungen an bestimmten Stellen in der ArrayList dopplungen, startet bei 0
         ArrayList<Medium> dopplungen = new ArrayList<>();
         for(Medium medium : myZettelkasten){
             if(medium.getTitel()==titel){
@@ -54,15 +49,15 @@ public class Zettelkasten implements Iterable<Medium> {
 
     }
 
-    public boolean dropMedium(String titel, String alleLöschen){
+    public boolean dropMedium(String titel, String alleLöschen){        //Methode um alle Medien zu löschen, einfach Titel eingeben der gelöscht werden soll und einen zweiten String "ja" als bestätigung das auch wirklich alles gelöscht werden soll
         if(alleLöschen == "ja"){
-        boolean gelöscht = false;
+        boolean gelöscht = true;
         for (Medium test5: findMedium(titel)) {
-            gelöscht |= myZettelkasten.remove(test5);
+            myZettelkasten.remove(test5);
         }
         return gelöscht;
         }else{
-            System.out.println("Biite geben sie 'ja' ein wenn sie alle Duplikate löschen möchten!");
+            System.out.println("Biite geben sie 'ja' ein wenn sie alle Duplikate löschen möchten!");  //falls etwas anderes als ja eingeben wurde wird eine Fehlermedlung ausgebenen
         }
         return true;
     }
