@@ -49,13 +49,13 @@ public class Zettelkasten implements Iterable<Medium> {
 
     }
 
-    public boolean dropMedium(String titel, String alleLöschen){        //Methode um alle Medien zu löschen, einfach Titel eingeben der gelöscht werden soll und einen zweiten String "ja" als bestätigung das auch wirklich alles gelöscht werden soll
-        if(alleLöschen == "ja"){
-        boolean gelöscht = true;
+    public boolean dropMedium(String titel, String alleLoeschen){        //Methode um alle Medien zu loeschen, einfach Titel eingeben der geloescht werden soll und einen zweiten String "ja" als bestätigung das auch wirklich alles gelöscht werden soll
+        if(alleLoeschen == "ja"){
+        boolean geloescht = true;
         for (Medium test5: findMedium(titel)) {
             myZettelkasten.remove(test5);
         }
-        return gelöscht;
+        return geloescht;
         }else{
             System.out.println("Biite geben sie 'ja' ein wenn sie alle Duplikate löschen möchten!");  //falls etwas anderes als ja eingeben wurde wird eine Fehlermedlung ausgebenen
         }
