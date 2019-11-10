@@ -62,7 +62,7 @@ public class Zettelkasten implements Iterable<Medium> {
         return true;
     }
 
-    public Medium findSingleMedium(String titel){
+    public Medium findSingleMedium(String titel){                       //einen einzlenen Titel finden, der erste der gefunden wird, wird zurückgegeben
         for(Medium medium : myZettelkasten){
             if(medium.getTitel().equals(titel)){
                 return medium;
@@ -73,9 +73,9 @@ public class Zettelkasten implements Iterable<Medium> {
 
     }
     //test
-    public List<Medium> findMedium(String titel) {
-        int i = 0;
-            List<Medium> dopplungen = new ArrayList<>();
+    public List<Medium> findMedium(String titel) {                         //findet alle Medien, speichert sie in den jeweiligen ArrayListen, dabei hat jede Klasse ihre eigene, bei jedem Element wird geguckt in welche der Klasse es geht
+                                                                            //danach wird es in die jeweiligen ArrayLists gepackt, diese ArrayListen werden in die sortierte ArrayListe in der richtigen reihenfolge gepackt
+            List<Medium> dopplungen = new ArrayList<>();                    //als letztes wird dann die sortierte ArrayList ausgegeben
             List<Medium> dopplungenSortiert = new ArrayList<>();
             List<Medium> Zeitschrift = new ArrayList<>();
             List<Medium> CD = new ArrayList<>();
@@ -93,8 +93,6 @@ public class Zettelkasten implements Iterable<Medium> {
                         Buch.add(medium);
                     }else if(medium.getClass().getName()=="com.company.ElektronischesMedium"){
                         ElektronischesMedium.add(medium);
-                    }else{
-                        i++;
                     }
                 }
 
@@ -117,9 +115,9 @@ public class Zettelkasten implements Iterable<Medium> {
 
 
     Boolean sortierung = null;          //null unsortiert, true absteigend sortiert, false aufsteigend sortiert
-    public boolean sort(boolean absteigend){
-        if(absteigend==true){
-            if (sortierung != null && sortierung.equals(true)){
+    public boolean sort(boolean absteigend){        //falls boolean absteigend true ist wird absteigend sortiert, dabei wird direkt überprüft ob der String schon einmmal genau in der Reihenfolge sortiert wurde
+        if(absteigend==true){                         //ies wird auf null gesetzt jedes mal wenn ein medium hinzugefügt wird
+            if (sortierung != null && sortierung.equals(true)){                 //wenn absteigend false gesetzt ist wird ebenfalls geguck ob es schon richtig sortiert wurde, wenn nicht sortiert er es richtig
                 return false;
             }else{
                 Collections.sort(myZettelkasten);
