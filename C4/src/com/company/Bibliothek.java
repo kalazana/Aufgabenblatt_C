@@ -41,12 +41,31 @@ public class Bibliothek {
         }
 
 
-
-
-
-
         //gesamte Datenbank basiert auf der Vorlesung von Dr. Pieper (Apache Derby)
-       final String query = "SELECT * FROM MEDIEN WHERE TYP = 'Buch'";              //Ab hier beginnt die Datenbank, SQL Anweisung zum auswählen was angezeigt werden soll
+
+
+       try(                                                             //hier werden Daten erstellt und in die Datenbank eingelesen
+            Connection con = createConnection();
+            Statement statement = con.createStatement();){
+
+
+            DatabaseMetaData metaData = con.getMetaData();
+            ResultSet tables = metaData.getTables(null, null, "Medien",null);
+
+           if(!tables.next()){
+                statement.execute(dbSaveerstellen());               //wenn Datenbank noch aktuell ist wird sie nicht geupdatet, ansonsten werden die selben Objekte immer wieder neu eingefügt
+            }
+
+            statement.executeUpdate(buildInsertStatement("CD","4","Apple","Test"));             //einfügen der Elemente in die Datenbank
+            statement.executeUpdate(buildInsertStatement("ElektronischesMedium","test27","host.de"));
+            statement.executeUpdate(buildInsertStatement("Zeitschrift","holger","4564356","37","42"));
+            statement.executeUpdate(buildInsertStatement("Buch", "test", "27","test","test","test"));
+
+        }catch (SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+
+        final String query = "SELECT * FROM MEDIEN WHERE TYP = 'Buch'";              //Ab hier beginnt die Datenbank, SQL Anweisung zum auswählen was angezeigt werden soll
 
         try(
                 Connection con = createConnection();                                 //stellt Verbidnung zur Datenbank her, hier wird ausgegebenn was in der Datenbank alles exisitiert (und der SQL anweisung entspricht
@@ -70,27 +89,6 @@ public class Bibliothek {
         }catch(ClassNotFoundException|SQLException e){
             e.printStackTrace();
 
-            }
-
-       try(                                                             //hier werden Daten erstellt und in die Datenbank eingelesen
-            Connection con = createConnection();
-            Statement statement = con.createStatement();){
-
-
-            DatabaseMetaData metaData = con.getMetaData();
-            ResultSet tables = metaData.getTables(null, null, "Medien",null);
-
-           if(!tables.next()){
-                statement.execute(dbSaveerstellen());               //wenn Datenbank noch aktuell ist wird sie nicht geupdatet
-            }
-
-            statement.executeUpdate(buildInsertStatement("CD","4","Apple","Test"));             //einfügen der Elemente in die Datenbank
-            statement.executeUpdate(buildInsertStatement("ElektronischesMedium","test27","host.de"));
-            statement.executeUpdate(buildInsertStatement("Zeitschrift","holger","4564356","37","42"));
-            statement.executeUpdate(buildInsertStatement("Buch", "test", "27","test","test","test"));
-
-        }catch (SQLException | ClassNotFoundException e){
-            e.printStackTrace();
         }
 
     }
